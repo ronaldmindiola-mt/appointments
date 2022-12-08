@@ -1,0 +1,34 @@
+{
+    "title": "Medical Appointments",
+    "subtitle": "Remember for you",
+
+    "brand": {
+      "label": "Appointment",
+      "icon": "/public/icon.png",
+      "logo": "/public/logo.png",
+      "path": "/"
+    },
+
+    "pages": [
+      {
+        "label": "Principal",
+        "path": "/"
+      },
+
+      {
+        "label": "Pacientes",
+        "path": "/pacientes"
+      },
+
+      {
+        "label": "Quienes Somos?",
+        "path": "/nosotros"
+      },
+
+      {
+        "label": "Contacto",
+        "path": "/contacto"
+      }
+  ]
+
+}
