@@ -1,11 +1,12 @@
 import React from "react";
-
+import { Container } from "@mui/material";
 
 const Index = () => {
-  
   return (
     <>
-      <h1>Medical Appointment</h1>
+      <Container>
+        dgdg
+      </Container>
     </>
   );
 };

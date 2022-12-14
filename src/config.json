@@ -21,6 +21,16 @@
       },
 
       {
+        "label": "Agendas",
+        "path": "/agendas"
+      },
+
+      {
+        "label": "Citas",
+        "path": "/citas"
+      },
+
+      {
         "label": "Quienes Somos?",
         "path": "/nosotros"
       },

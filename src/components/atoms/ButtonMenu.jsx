@@ -1,21 +1,44 @@
-import React from "react";
-import { Box, IconButton } from "@mui/material";
+import React from 'react';
+import { Link } from "react-router-dom";
+import { Menu, IconButton, MenuItem } from "@mui/material";
+import { MdMenu } from "react-icons/md";
 
-const ButtonMenu = () => {
+export default function ButtonMenu() {
+  const [anchorEl, setAnchorEl] = React.useState(null);
+
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
   return (
-    <>
-      <Box sx={{ ml: 2 }}>
-        <IconButton
-          size="large"
-          edge="start"
-          color="inherit"
-          aria-label="open drawer"
-          sx={{ mr: 2, display: { md: "none" } }}
-        >jjj
-        </IconButton>
-      </Box>
-    </>
-  );
-};
+    <div>
+      <IconButton sx={{ display: { sx:'flex', md:'none'}}} aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick} variant="text" color="inherit">
+        <MdMenu/>
+      </IconButton>
+      <Menu
+        id="simple-menu"
+        anchorEl={anchorEl}
+        keepMounted
+        open={Boolean(anchorEl)}
+        onClose={handleClose}
+      >
+        <MenuItem onClick={handleClose} component={Link} to="/pacientes">
+          Pacientes
+        </MenuItem>
 
-export default ButtonMenu;
+        <MenuItem onClick={handleClose} component={Link} to="/agendas">
+          Agendas
+        </MenuItem>
+
+        <MenuItem onClick={handleClose} component={Link} to="/citas">
+          Citas
+        </MenuItem>
+        
+      </Menu>
+    </div>
+  );
+}

@@ -1,26 +1,63 @@
-import React from "react";
-import { AppBar, Toolbar } from '@mui/material';
+import * as React from 'react';
+import AppBar from '@mui/material/AppBar';
+import Toolbar from '@mui/material/Toolbar';
+import useScrollTrigger from '@mui/material/useScrollTrigger';
 
-// Components
 import ButtonMenu from '../atoms/ButtonMenu';
-import Brand from '../atoms/Brand'
-import ItemsMenu from '../atoms/ItemsMenu'
+import Brand from '../atoms/Brand';
+import NavItem from '../molecules/NavItem';
 
 // Configurations
-import { brand } from '../../config.json'
+const config = require('../../config.json');
 
-const NavBar = () => {
-  return (
+interface Props {
+  /**
+   * Injected by the documentation to work in an iframe.
+   * You won't need it on your project.
+   */
+  window?: () => Window;
+  children: React.ReactElement;
+}
+
+function ElevationScroll(props: Props) {
+  const { children, window } = props;
+  // Note that you normally won't need to set the window ref as useScrollTrigger
+  // will default to window.
+  // This is only being set here because the demo is in an iframe.
+  const trigger = useScrollTrigger({
+    disableHysteresis: true,
+    threshold: 0,
+    target: window ? window() : undefined,
+  });
+
+  return React.cloneElement(children, {
+    elevation: trigger ? 4 : 0,
+  });
+}
+
+export default function ElevateAppBar(props: Props) {
+    const { brand } = config;
+    return (
     <>
-        <AppBar position='fixed'>
+
+      <ElevationScroll {...props}>
+        <AppBar>
           <Toolbar>
+            
             <ButtonMenu />
+
             <Brand label={brand.label} path={brand.path} />
-            <ItemsMenu  />
+
+            <NavItem />
+
           </Toolbar>
         </AppBar>
+        
+      </ElevationScroll>
+
+      <Toolbar />
+      
+      
     </>
   );
-};
-
-export default NavBar;
+}

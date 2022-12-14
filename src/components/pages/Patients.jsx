@@ -1,12 +1,27 @@
 import React, { useEffect, useState } from "react";
-import { Avatar, Card, CardHeader, IconButton } from "@mui/material";
+import {
+  Avatar,
+  Card,
+  CardHeader,
+  CardContent,
+  Container,
+  IconButton,
+  Typography
+} from "@mui/material";
+import { MdDeleteForever } from "react-icons/md";
+import { IconContext } from "react-icons";
+
 // Components
+import Loading from "../atoms/Loading";
 import SectionPages from "../atoms/SectionPages";
+
+import BarTools from '../organisms/BarTools'
+
 
 const Patients = (props) => {
   const URL = "http://localhost:8080/api/pacientes";
 
-  const [, setPatients] = useState();
+  const [patients, setPatients] = useState();
 
   const fetchApi = async () => {
     const options = {
@@ -28,20 +43,54 @@ const Patients = (props) => {
 
   return (
     <>
-      <SectionPages section={props.section} />
+      <Container>
+        <SectionPages section={props.section} />
 
-      <Card sx={{ minWidth: 100 }}>
-        asa
-      </Card>
+        <Card sx={{ p: 1 }}>
 
-      <Card sx={{ minWidth: 100 }}>
-        <CardHeader
-          avatar={<Avatar aria-label="assas"></Avatar>}
-          action={<IconButton aria-label=""></IconButton>}
-          title="Nombre del Paciente"
-          subheader="Identificación"
-        />
-      </Card>
+          <BarTools/>
+
+          <Card sx={{ p: 1 }}>
+          {!patients ? (
+            <Loading />
+          ) : (
+            patients.map((patient, id) => {
+              return (
+                <>
+                  <Card sx={{ pb: 1 }}>
+                    <Card variant="outlined">
+                      <CardHeader
+                        key={patient.id}
+                        avatar={<Avatar aria-label="Patient"></Avatar>}
+                        action={
+                          <IconButton
+                            aria-label=""
+                          >
+                            <IconContext.Provider value={{ color: "red", className: "global-class-name" }}>
+                              <MdDeleteForever />
+                            </IconContext.Provider>
+                          </IconButton>}
+                          title={patient.dni}
+                          subheader={patient.name + " " + patient.lastName}
+                      />
+
+                      <CardContent>
+                        <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
+                          Contenido
+                        </Typography>
+                        </CardContent>
+                    </Card>
+                  </Card>
+                  
+                </>
+              );
+            })
+          )}
+          </Card>
+
+          
+        </Card>
+      </Container>
     </>
   );
 };
