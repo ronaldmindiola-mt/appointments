@@ -11,6 +11,7 @@ const Search = () => {
           label={<ImSearch />}
           variant="outlined"
           size={"small"}
+          
         />
       </Box>
     </>

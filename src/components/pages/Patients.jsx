@@ -2,21 +2,21 @@ import React, { useEffect, useState } from "react";
 import {
   Avatar,
   Card,
-  CardHeader,
-  CardContent,
   Container,
-  IconButton,
-  Typography
+  Typography,
+  ListItemButton,
+  ListItemText,
+  ListItemIcon,
 } from "@mui/material";
-import { MdDeleteForever } from "react-icons/md";
-import { IconContext } from "react-icons";
+//import { MdExpandMore } from "react-icons/md";
+//import { MdDeleteForever } from "react-icons/md";
+//import { IconContext } from "react-icons";
 
 // Components
 import Loading from "../atoms/Loading";
 import SectionPages from "../atoms/SectionPages";
 
-import BarTools from '../organisms/BarTools'
-
+import BarTools from "../organisms/BarTools";
 
 const Patients = (props) => {
   const URL = "http://localhost:8080/api/pacientes";
@@ -46,49 +46,49 @@ const Patients = (props) => {
       <Container>
         <SectionPages section={props.section} />
 
-        <Card sx={{ p: 1 }}>
+        <Card sx={{ p:1 }} >
+          <BarTools />
 
-          <BarTools/>
+          <Card sx={{ px: 1, pt: 1 }} variant="outlined">
 
-          <Card sx={{ p: 1 }}>
-          {!patients ? (
-            <Loading />
-          ) : (
-            patients.map((patient, id) => {
-              return (
-                <>
-                  <Card sx={{ pb: 1 }}>
-                    <Card variant="outlined">
-                      <CardHeader
-                        key={patient.id}
-                        avatar={<Avatar aria-label="Patient"></Avatar>}
-                        action={
-                          <IconButton
-                            aria-label=""
-                          >
-                            <IconContext.Provider value={{ color: "red", className: "global-class-name" }}>
-                              <MdDeleteForever />
-                            </IconContext.Provider>
-                          </IconButton>}
-                          title={patient.dni}
-                          subheader={patient.name + " " + patient.lastName}
-                      />
+            
 
-                      <CardContent>
-                        <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-                          Contenido
-                        </Typography>
-                        </CardContent>
+            <Card sx={{ p: 0, mb: 1, border:2 }}>
+
+            aasds
+            </Card>
+            
+            {!patients ? (
+              <Loading />
+            ) : (
+              
+              patients.map((patient, id) => {
+                return (
+                  <>
+                    
+
+
+                    <Card sx={{ p: 0, mb: 1, border:2 }} >
+                      
+                        <ListItemButton component="a" href="#simple-list" key={patient.id}>
+
+                          <ListItemIcon>
+                            <Avatar />
+                          </ListItemIcon>
+                        
+                          <ListItemText key={patient.id} primary={<Typography variant="h6">{patient.name} {patient.lastName}</Typography>} />
+                          <ListItemText primary={<Typography variant="h5">{patient.dni}</Typography>}  />
+                          <ListItemText sx={{display:{xs:"none", md:"inline-flex"}}} primary={<Typography variant="caption">{patient.id}</Typography>} />
+
+                      </ListItemButton>
+                      
+                      
                     </Card>
-                  </Card>
-                  
-                </>
-              );
-            })
-          )}
+                  </>
+                );
+              })
+            )}
           </Card>
-
-          
         </Card>
       </Container>
     </>

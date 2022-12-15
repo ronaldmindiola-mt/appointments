@@ -6,7 +6,7 @@ import Filters from "../atoms/Filters";
 const BarTools = () => {
   return (
     <>
-      <Card sx={{ p: 1, mb: 1 }}>
+      <Card sx={{ p: 1, mb: 1 }} variant="outlined">
         <Grid container spacing={2}>
           <Grid item xs={6} md={3}>
             <Search />
