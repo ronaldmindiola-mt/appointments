@@ -5,6 +5,7 @@ import {
   AccordionSummary,
   Container,
   Card,
+  Grid,
   Typography,
 } from "@mui/material";
 import { MdExpandMore } from "react-icons/md";
@@ -40,14 +41,27 @@ const Appointment = (props) => {
                 aria-controls="panel1bh-content"
                 id="panel1bh-header"
               >
-                <Typography>Item Cita</Typography>
-                <Typography>I am an accordion</Typography>
+                <Grid container spacing={2}>
+
+                  <Grid xs={4}>
+                    <Typography variant="body1" color="initial">
+                      dni:
+                    </Typography>
+                  </Grid>
+
+                  <Grid xs={4}>
+                    Nombre:
+                  </Grid>
+
+                  <Grid xs={4}>
+                    Apellido:
+                  </Grid>
+
+                </Grid>
+                
               </AccordionSummary>
               <AccordionDetails>
-                <Typography>
-                  Nulla facilisi. Phasellus sollicitudin nulla et quam mattis
-                  feugiat. Aliquam eget maximus est, id dignissim quam.
-                </Typography>
+                <Typography>Detalles</Typography>
               </AccordionDetails>
             </Accordion>
           </Card>
@@ -114,6 +128,7 @@ const Appointment = (props) => {
           </Typography>
         </AccordionDetails>
       </Accordion>
+      
       <Accordion
         expanded={expanded === "panel4"}
         onChange={handleChange("panel4")}
@@ -123,7 +138,7 @@ const Appointment = (props) => {
           aria-controls="panel4bh-content"
           id="panel4bh-header"
         >
-          <Typography>Personal data</Typography>
+          <Typography>Ronald Mindiola</Typography>
         </AccordionSummary>
         <AccordionDetails>
           <Typography>

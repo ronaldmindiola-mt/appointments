@@ -14,6 +14,10 @@ import NavBar from "./components/organisms/NavBar";
 import SignIn from "./components/pages/SignIn";
 import SignUp from "./components/pages/SignUp";
 import { useState } from "react";
+import PatientForm from "./components/organisms/PatientForm";
+import AgendaForm from "./components/organisms/AgendaForm";
+import AppointmentForm from './components/organisms/AppointmentForm'
+
 
 // Configurations
 const { title } = require("./config.json");
@@ -35,6 +39,8 @@ function App() {
 
       <Router>
         <NavBar />
+
+        
 
         <Routes>
           <Route
@@ -60,28 +66,39 @@ function App() {
           />
 
           <Route
+            path={"/pacientes/:id"}
+            element={
+              !isLogged ? <PatientForm section="Nueva Agenda" exact /> : <SignIn />
+            }
+          />
+
+          <Route
             path={"/agendas"}
             element={
-              !isLogged ? (
-                <Agendas section="Agendas" exact />
-              ) : (
-                <SignIn />
-              )
+              !isLogged ? <Agendas section="Agendas"  exact /> : <SignIn />
+            }
+          />
+
+          <Route
+            path={"/agendas/:id"}
+            element={
+              !isLogged ? <AgendaForm section="Nueva Agenda" exact /> : <SignIn />
             }
           />
 
           <Route
             path={"/citas"}
             element={
-              !isLogged ? (
-                <Appointment section="Citas" exact />
-              ) : (
-                <SignIn />
-              )
+              !isLogged ? <Appointment section="Citas" exact /> : <SignIn />
             }
           />
 
-
+          <Route
+            path={"/citas/:id"}
+            element={
+              !isLogged ? <AppointmentForm section="Citas" exact /> : <SignIn />
+            }
+          />
 
           <Route
             path={"/signin"}

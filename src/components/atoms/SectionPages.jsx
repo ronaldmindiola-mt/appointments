@@ -7,7 +7,7 @@ const SectionPages = (props) => {
       <Box
         p={1}
       >
-        <Typography variant="h3" color="initial">
+        <Typography color="initial">
           {props.section}
         </Typography>
         
