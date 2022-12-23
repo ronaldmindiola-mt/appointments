@@ -16,105 +16,131 @@ import SignUp from "./components/pages/SignUp";
 import { useState } from "react";
 import PatientForm from "./components/organisms/PatientForm";
 import AgendaForm from "./components/organisms/AgendaForm";
-import AppointmentForm from './components/organisms/AppointmentForm'
+import AppointmentForm from "./components/organisms/AppointmentForm";
+import { ThemeProvider, createTheme } from "@mui/material";
 
 
 // Configurations
 const { title } = require("./config.json");
 
+
 function App() {
-  const [isLogged, setIsLogged] = useState(false);
+  const [isLogged, ] = useState(false);
 
-  const handleLogin = () => {
-    setIsLogged(true);
-  };
+  const darkTheme = createTheme({
+    palette: {
+      mode: "dark"
+    },
+  });
 
-  const handleLogout = () => {
-    setIsLogged(false);
-  };
+  
+
 
   return (
     <>
-      <CssBaseline />
+      <ThemeProvider theme={darkTheme}>
+        <CssBaseline />
 
-      <Router>
-        <NavBar />
+        <Router>
+          
+          <NavBar />
 
-        
+          <Routes>
+            <Route
+              path={"/"}
+              element={
+                !isLogged ? (
+                  <Index title={title} section="Medical Appointment" exact />
+                ) : (
+                  <SignIn />
+                )
+              }
+            />
 
-        <Routes>
-          <Route
-            path={"/"}
-            element={
-              !isLogged ? (
-                <Index title={title} section="Medical Appointment" exact />
-              ) : (
-                <SignIn />
-              )
-            }
-          />
+            <Route
+              path={"/pacientes"}
+              element={
+                !isLogged ? (
+                  <Patients section="Listado de Pacientes" exact />
+                ) : (
+                  <SignIn />
+                )
+              }
+            />
 
-          <Route
-            path={"/pacientes"}
-            element={
-              !isLogged ? (
-                <Patients section="Listado de Pacientes" exact />
-              ) : (
-                <SignIn />
-              )
-            }
-          />
+            <Route
+              path={"/pacientes/pacienteForm"}
+              element={
+                !isLogged ? (
+                  <PatientForm section="Nuevo Paciente" exact />
+                ) : (
+                  <SignIn />
+                )
+              }
+            />
 
-          <Route
-            path={"/pacientes/:id"}
-            element={
-              !isLogged ? <PatientForm section="Nueva Agenda" exact /> : <SignIn />
-            }
-          />
+            <Route
+              path={"/pacientes/:id"}
+              element={
+                !isLogged ? (
+                  <PatientForm section="Nueva Agenda" exact />
+                ) : (
+                  <SignIn />
+                )
+              }
+            />
 
-          <Route
-            path={"/agendas"}
-            element={
-              !isLogged ? <Agendas section="Agendas"  exact /> : <SignIn />
-            }
-          />
+            <Route
+              path={"/agendas"}
+              element={
+                !isLogged ? <Agendas section="Agendas" exact /> : <SignIn />
+              }
+            />
 
-          <Route
-            path={"/agendas/:id"}
-            element={
-              !isLogged ? <AgendaForm section="Nueva Agenda" exact /> : <SignIn />
-            }
-          />
+            <Route
+              path={"/agendas/:id"}
+              element={
+                !isLogged ? (
+                  <AgendaForm section="Nueva Agenda" exact />
+                ) : (
+                  <SignIn />
+                )
+              }
+            />
 
-          <Route
-            path={"/citas"}
-            element={
-              !isLogged ? <Appointment section="Citas" exact /> : <SignIn />
-            }
-          />
+            <Route
+              path={"/citas"}
+              element={
+                !isLogged ? <Appointment section="Citas" exact /> : <SignIn />
+              }
+            />
 
-          <Route
-            path={"/citas/:id"}
-            element={
-              !isLogged ? <AppointmentForm section="Citas" exact /> : <SignIn />
-            }
-          />
+            <Route
+              path={"/citas/:id"}
+              element={
+                !isLogged ? (
+                  <AppointmentForm section="Citas" exact />
+                ) : (
+                  <SignIn />
+                )
+              }
+            />
 
-          <Route
-            path={"/signin"}
-            element={<SignIn section="Iniciar Sesión" exact />}
-          />
+            <Route
+              path={"/signin"}
+              element={<SignIn section="Iniciar Sesión" exact />}
+            />
 
-          <Route
-            path={"/signup"}
-            element={<SignUp section="Registrarse" exact />}
-          />
+            <Route
+              path={"/signup"}
+              element={<SignUp section="Registrarse" exact />}
+            />
 
-          <Route path={"*"} element={<NoFound />} />
-        </Routes>
-      </Router>
+            <Route path={"*"} element={<NoFound />} />
+          </Routes>
+        </Router>
+      </ThemeProvider>
     </>
   );
 }
-
 export default App;

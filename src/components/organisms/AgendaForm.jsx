@@ -31,13 +31,6 @@ const AgendaForm = () => {
     appointments: [],
   });
 
-  function handleChange({ target }) {
-    setAgenda({
-      ...agenda,
-      [target.name]: target.value,
-    });
-  }
-
   const [physicians, setPhysicians] = useState([]);
 
   async function listPhysicians() {
@@ -49,7 +42,7 @@ const AgendaForm = () => {
 
   useEffect(() => {
     if (id !== undefined) {
-      setDisabled(true);
+      setDisabled(false);
       findAgendaById(id).then((response) => {
         setAgenda(response);
       });
@@ -57,20 +50,25 @@ const AgendaForm = () => {
     listPhysicians();
   }, [id]);
 
+  function handleChange({ target }) {
+    setAgenda({
+      ...agenda,
+      [target.name]: target.value
+    });
+  }
+
   async function handleSubmit(e) {
     e.preventDefault();
     const response = await saveAgenda(agenda);
     if (id !== undefined) {
-      alert("Agenda actualizada correctamente!" + response.id);
+      alert("La Agenda con el id: " + response.id + " fué actualizada correctamente!");
     } else {
-      alert("Agenda registrada correctamente!" + response.id);
+      alert("La Agenda con el id: " + response.id + " fué registrada correctamente!");
     }
     returnToAgenda();
   }
 
-  const [disabled, setDisabled] = useState(false);
-
-  console.log(disabled);
+  const [disabled, setDisabled] = useState(true);
 
   return (
     <>
@@ -109,29 +107,37 @@ const AgendaForm = () => {
                   name="date"
                   onChange={handleChange}
                   type="date"
+                  value={agenda.date}
                   variant="outlined"
+                  disabled={disabled}
                   sx={{
                     mb: 2,
                   }}
                 />
 
                 <Select
+                  required
                   labelId="demo-simple-select-label"
+                  name="idPhysician"
+                  value={agenda.idPhysician}
                   id="demo-simple-select"
                   onChange={handleChange}
+                  disabled = {disabled}
                   sx={{mb:2}}
                 >
                   {physicians.map((physician) => {
                     return (
-                      <MenuItem value={physician.id}>{physician.name}</MenuItem>
+                      <MenuItem value={physician.id}>{physician.name} {physician.lastName}</MenuItem>
                     );
                   })}
                 </Select>
 
+                <Button disabled = {disabled} variant="success" type="submit">{id!==undefined? "Actualizar" : "Guardar" } </Button>
+
                 <Button
                   variant="contained"
                   color="primary"
-                  size="large"
+                  size="small"
                   type="submit"
                   startIcon={<IoIosSave />}
                 >

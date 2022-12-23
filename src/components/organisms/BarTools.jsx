@@ -1,10 +1,8 @@
 import * as React from "react";
-import { Button, Card, Grid } from "@mui/material";
-import { FaPlus } from "react-icons/fa";
+import { Card, Grid } from "@mui/material";
 import Search from "../atoms/Search";
 import Filters from "../atoms/Filters";
 import Order from "../atoms/Order";
-import { Link } from "react-router-dom";
 
 const BarTools = (props) => {
   return (
@@ -21,14 +19,6 @@ const BarTools = (props) => {
 
           <Grid item xs={6} md={2}>
             <Filters />
-          </Grid>
-
-          <Grid item xs={6} md={3}>
-            <Link to={"/agendas/"}>
-              <Button variant="contained" endIcon={<FaPlus />}>
-                Nuevo {props.section}
-              </Button>
-            </Link>
           </Grid>
         </Grid>
       </Card>
