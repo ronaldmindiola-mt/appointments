@@ -1,4 +1,4 @@
-const BASE_URL = "http://localhost:8080/api/";
+const BASE_URL = "http://193.122.154.103:8080/api/";
 
 // Agendas - Listar Agendas
 export async function listAgendas() {

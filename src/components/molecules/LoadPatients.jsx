@@ -19,7 +19,7 @@ import Loading from "../atoms/Loading";
 import { Link } from "react-router-dom";
 
 const LoadPatients = (props) => {
-  const URL = "http://localhost:8080/api/pacientes";
+  const URL = "http://193.122.154.103:8080/api/pacientes";
 
   const [patients, setPatients] = useState();
   const [expanded, setExpanded] = React.useState(false);

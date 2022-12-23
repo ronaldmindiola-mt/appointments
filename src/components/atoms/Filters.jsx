@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, FormControl, InputLabel, Select, MenuItem } from "@mui/material";
+import { FormControl, InputLabel, Select, MenuItem } from "@mui/material";
 
 const Filters = () => {
   const [filter, setFilter] = React.useState('');
